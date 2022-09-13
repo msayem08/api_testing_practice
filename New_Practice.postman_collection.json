@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "8987283b-d9a9-4ee5-b4e2-b122dcf2b131",
+		"name": "New_Practice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19779257"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"Id2\",jsonData.bookingid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"firstname\" : \"Nail\",\r\n\"lastname\" : \"Hogg\",\r\n\"totalprice\" : 615,\r\n\"depositpaid\" : true,\r\n\"bookingdates\" : {\r\n\"checkin\" : \"2018-01-01\",\r\n\"checkout\" : \"2019-01-01\"\r\n},\r\n\"additionalneeds\" : \"Breakfast\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url2}}/booking",
+					"host": [
+						"{{url2}}"
+					],
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url2}}/booking/{{Id2}}",
+					"host": [
+						"{{url2}}"
+					],
+					"path": [
+						"booking",
+						"{{Id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"access\",jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"username\": \"admin\",\r\n\"password\": \"password123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url2}}/auth",
+					"host": [
+						"{{url2}}"
+					],
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token={{access}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"firstname\" : \"Andy\",\r\n\"lastname\" : \"Robertson\",\r\n\"totalprice\" : 379,\r\n\"depositpaid\" : true,\r\n\"bookingdates\" : {\r\n\"checkin\" : \"2018-01-01\",\r\n\"checkout\" : \"2022-01-01\"\r\n},\r\n\"additionalneeds\" : \"Breakfast\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url2}}/booking/{{Id2}}",
+					"host": [
+						"{{url2}}"
+					],
+					"path": [
+						"booking",
+						"{{Id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token={{access}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url2}}/booking/{{Id2}}",
+					"host": [
+						"{{url2}}"
+					],
+					"path": [
+						"booking",
+						"{{Id2}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
